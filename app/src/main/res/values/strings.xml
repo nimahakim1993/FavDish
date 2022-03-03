@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FavDish</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!--TODO Step 3: Add the string values to the strings.xml file.-->
+    <!--START-->
+    <string name="splash_screen_title">Fav Dish</string>
+    <!--END-->
+</resources>
