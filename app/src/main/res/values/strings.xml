@@ -7,5 +7,6 @@
     <!--TODO Step 3: Add the string values to the strings.xml file.-->
     <!--START-->
     <string name="splash_screen_title">Fav Dish</string>
+    <string name="add_dish">Add Dish</string>
     <!--END-->
 </resources>

@@ -1,4 +1,4 @@
-package com.company.nima.favdish.ui.home
+package com.company.nima.favdish.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
