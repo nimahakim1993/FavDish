@@ -15,6 +15,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,11 +26,15 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.company.nima.favdish.R
+import com.company.nima.favdish.application.FavDishApplication
 import com.company.nima.favdish.databinding.ActivityAddUpdateDishBinding
 import com.company.nima.favdish.databinding.DialogCustomImageSelectionBinding
 import com.company.nima.favdish.databinding.DialogCustomListBinding
+import com.company.nima.favdish.model.entities.FavDish
 import com.company.nima.favdish.utils.Constants
 import com.company.nima.favdish.view.adapters.CustomListItemAdapter
+import com.company.nima.favdish.viewmodel.FavDishViewModel
+import com.company.nima.favdish.viewmodel.FavDishViewModelFactory
 import com.karumi.dexter.PermissionToken
 
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -55,6 +60,10 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mBinding : ActivityAddUpdateDishBinding
     private var mImagePath: String = ""
     private lateinit var mCustomListDialog: Dialog
+
+    private val mFavDishViewModel : FavDishViewModel by viewModels {
+        FavDishViewModelFactory((application as FavDishApplication).repository)
+    }
 
     companion object{
         private const val CAMERA = 1
@@ -87,17 +96,17 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.et_type -> {
                 customItemDialog(
-                resources.getString(R.string.title_select_dish_type), Constants.dishTypes(), Constants.DISH_TYPE)
+                    resources.getString(R.string.title_select_dish_type), Constants.dishTypes(), Constants.DISH_TYPE)
                 return
             }
             R.id.et_category -> {
                 customItemDialog(
-                resources.getString(R.string.title_select_dish_category), Constants.dishCategories(), Constants.DISH_CATEGORY)
+                    resources.getString(R.string.title_select_dish_category), Constants.dishCategories(), Constants.DISH_CATEGORY)
                 return
             }
             R.id.et_cooking_time -> {
                 customItemDialog(
-                resources.getString(R.string.title_select_dish_cooking_time), Constants.dishCookTime(), Constants.DISH_COOKING_TIME)
+                    resources.getString(R.string.title_select_dish_cooking_time), Constants.dishCookTime(), Constants.DISH_COOKING_TIME)
                 return
             }
             R.id.btn_add_dish -> {
@@ -167,15 +176,25 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
                         ).show()
                     }
                     else -> {
+                        val favDishDetails: FavDish = FavDish(
+                            mImagePath,
+                            Constants.DISH_IMAGE_SOURCE_LOCAL,
+                            title,
+                            type,
+                            category,
+                            ingredients,
+                            cookingTimeInMinutes,
+                            cookingDirection,
+                            false)
 
-                        // TODO Step 8: Show the Toast Message for now that you dish entry is valid.
-                        // START
+                        mFavDishViewModel.insert(favDishDetails)
                         Toast.makeText(
-                            this@AddUpdateDishActivity,
-                            "All the entries are valid.",
+                            applicationContext,
+                            "You successfully added your dish",
                             Toast.LENGTH_SHORT
                         ).show()
-                        // END
+                        Log.i("Insertion", "successfully")
+                        finish()
                     }
                 }
             }
@@ -257,22 +276,22 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
                     load(selectedImageUri).
                     centerCrop().
                     diskCacheStrategy(DiskCacheStrategy.ALL).
-                        listener(object : RequestListener<Drawable> {
-                            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                                Log.i("TAG", "error loading image", e)
-                                return false
-                            }
+                    listener(object : RequestListener<Drawable> {
+                        override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                            Log.i("TAG", "error loading image", e)
+                            return false
+                        }
 
-                            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                                resource?.let {
-                                    val bitmap : Bitmap = resource.toBitmap()
-                                    mImagePath = saveImageToInternalStorage(bitmap)
-                                    Log.i("ImagePath", mImagePath)
-                                }
-                                return false
+                        override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                            resource?.let {
+                                val bitmap : Bitmap = resource.toBitmap()
+                                mImagePath = saveImageToInternalStorage(bitmap)
+                                Log.i("ImagePath", mImagePath)
                             }
+                            return false
+                        }
 
-                        }).
+                    }).
                     into(mBinding.ivDishImage)
 
 

@@ -9,4 +9,6 @@
     <dimen name="_20sdp">20sp</dimen>
     <dimen name="_200sdp">200sp</dimen>
     <dimen name="_1sdp">1sp</dimen>
+    <dimen name="_5sdp">5dp</dimen>
+    <dimen name="_120sdp">120</dimen>
 </resources>
