@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.company.nima.favdish.databinding.ItemDishLayoutBinding
 import com.company.nima.favdish.model.entities.FavDish
+import com.company.nima.favdish.view.fragments.AllDishesFragment
 
 class FavDishAdapter(private val fragment: Fragment): RecyclerView.Adapter<FavDishAdapter.ViewHolder>() {
 
@@ -22,6 +24,12 @@ class FavDishAdapter(private val fragment: Fragment): RecyclerView.Adapter<FavDi
         val dish = dishes[position]
         Glide.with(fragment).load(dish.image).into(holder.ivDishImage)
         holder.tvTitle.text = dish.title
+
+        holder.itemView.setOnClickListener {
+            if (fragment is AllDishesFragment){
+                fragment.dishDetails(dish)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
