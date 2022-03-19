@@ -17,7 +17,7 @@ data class FavDish(
     @ColumnInfo val ingredients: String,
     @ColumnInfo (name = "cooking_time") val cookingTime: String,
     @ColumnInfo (name = "direction_to_cook") val directionToCook: String,
-    @ColumnInfo (name = "favorite_dish") val favoriteDish: Boolean = false,
+    @ColumnInfo (name = "favorite_dish") var favoriteDish: Boolean = false,
     @PrimaryKey (autoGenerate = true) val id: Int = 0
 
 ): Parcelable

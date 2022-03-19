@@ -1,5 +1,6 @@
 package com.company.nima.favdish.view.fragments
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -78,12 +79,29 @@ class AllDishesFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-     fun dishDetails(favDish: FavDish){
+    fun dishDetails(favDish: FavDish){
         findNavController().navigate(AllDishesFragmentDirections.actionNavigationAllDishesToDishDetailsFragment(favDish))
 
         if (requireActivity() is MainActivity){
             (activity as MainActivity?)?.hideBottomNavigation()
         }
+    }
+
+    fun deleteDish(favDish: FavDish){
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(R.string.title_delete_dish).
+        setMessage(getString(R.string.msg_delete_dish_dialog, favDish.title)).
+        setIcon(R.drawable.ic_delete).
+        setPositiveButton(resources.getString(R.string.lbl_yes)){dialog, _ ->
+            mFavDishViewModel.delete(favDish)
+            dialog.dismiss()
+        }.
+        setNegativeButton(resources.getString(R.string.lbl_no)){dialog, _ ->
+            dialog.dismiss()
+        }
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.setCancelable(false)
+        alertDialog.show()
     }
 
     override fun onResume() {
