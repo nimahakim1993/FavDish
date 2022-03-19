@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/kotlin_projects/FavDish/app/src/main/res/drawable/favorite_button_background.xml" value="0.2169230769230769" />
         <entry key="..\:/kotlin_projects/FavDish/app/src/main/res/drawable/ic_add.xml" value="0.17314814814814813" />
+        <entry key="..\:/kotlin_projects/FavDish/app/src/main/res/drawable/ic_filter_list.xml" value="0.18888888888888888" />
         <entry key="..\:/kotlin_projects/FavDish/app/src/main/res/drawable/ic_more.xml" value="0.18888888888888888" />
         <entry key="..\:/kotlin_projects/FavDish/app/src/main/res/layout/activity_add_update_dish.xml" value="0.20416666666666666" />
         <entry key="..\:/kotlin_projects/FavDish/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />

@@ -15,6 +15,9 @@ object Constants {
 
     const val EXTRA_DISH_DETAILS = "dishDetails"
 
+    const val ALL_ITEMS: String = "All"
+    const val FILTER_SELECTION: String = "FilterSelection"
+
     // TODO Step 2: Define the Dish Types list items.
     // START
     /**

@@ -3,12 +3,17 @@ package com.company.nima.favdish.view.adapters
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.company.nima.favdish.databinding.ItemCustomListLayoutBinding
 import com.company.nima.favdish.view.activities.AddUpdateDishActivity
+import com.company.nima.favdish.view.fragments.AllDishesFragment
 
-class CustomListItemAdapter(private val activity: Activity, private val listItems: List<String>,
-        private val selection: String) : RecyclerView.Adapter<CustomListItemAdapter.ViewHolder>() {
+class CustomListItemAdapter(private val activity: Activity,
+                            private val fragment: Fragment?,
+                            private val listItems: List<String>,
+                            private val selection: String)
+    : RecyclerView.Adapter<CustomListItemAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomListItemAdapter.ViewHolder {
@@ -23,6 +28,9 @@ class CustomListItemAdapter(private val activity: Activity, private val listItem
         holder.tvText.setOnClickListener{
             if (activity is AddUpdateDishActivity){
                 activity.selectedListItem(item, selection)
+            }
+            if (fragment is AllDishesFragment){
+                fragment.filterSelection(item)
             }
         }
     }

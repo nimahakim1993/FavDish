@@ -44,7 +44,6 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.single.PermissionListener
 
 import com.karumi.dexter.Dexter
-import com.karumi.dexter.DexterBuilder
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
@@ -399,7 +398,7 @@ class AddUpdateDishActivity : AppCompatActivity(), View.OnClickListener {
         mCustomListDialog.setContentView(binding.root)
         binding.tvTitle.text = title
         binding.rvList.layoutManager = LinearLayoutManager(this)
-        val adapter = CustomListItemAdapter(this, listItems, selection)
+        val adapter = CustomListItemAdapter(this,null, listItems, selection)
         binding.rvList.adapter = adapter
         mCustomListDialog.show()
     }
