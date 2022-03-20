@@ -1,0 +1,18 @@
+package com.company.nima.favdish.model.network
+
+import com.company.nima.favdish.model.entities.RandomDish
+import com.company.nima.favdish.utils.Constants
+import io.reactivex.rxjava3.core.Single
+import retrofit2.http.GET
+import retrofit2.http.Query
+
+interface RandomDishApi {
+
+    @GET
+    fun getRandomDish(
+        @Query(Constants.API_KEY_VALUE) apiKey: String,
+        @Query(Constants.LIMIT_LICENSE) limitLicense: Boolean,
+        @Query(Constants.TAGS) tags: String,
+        @Query(Constants.NUMBER) number: Int
+    ): Single<RandomDish.Recipes>
+}
