@@ -1,6 +1,8 @@
 package com.company.nima.favdish.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.company.nima.favdish.model.entities.RandomDish
 import com.company.nima.favdish.model.network.RandomDishApiService
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -8,7 +10,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class RandomDishViewModel {
+class RandomDishViewModel : ViewModel(){
     private val randomRecipeApiService = RandomDishApiService()
 
     private val compositeDisposable = CompositeDisposable()
@@ -18,7 +20,7 @@ class RandomDishViewModel {
     val randomDishLoadingError = MutableLiveData<Boolean>()
 
     fun getRandomDishFromApi(){
-        loadRandomDish.value = false
+        loadRandomDish.value = true
 
         compositeDisposable.add(
             randomRecipeApiService.getRandomDish().
@@ -26,7 +28,7 @@ class RandomDishViewModel {
                     observeOn(AndroidSchedulers.mainThread()).
                     subscribeWith(object: DisposableSingleObserver<RandomDish.Recipes>(){
                         override fun onSuccess(value: RandomDish.Recipes) {
-                            loadRandomDish.value = true
+                            loadRandomDish.value = false
                             randomDishResponse.value = value
                             randomDishLoadingError.value = false
                         }
@@ -34,6 +36,7 @@ class RandomDishViewModel {
                         override fun onError(e: Throwable) {
                             loadRandomDish.value = false
                             randomDishLoadingError.value = true
+                            Log.i("log_error", "onError: " + e.localizedMessage)
                             e.printStackTrace()
                         }
 

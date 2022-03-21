@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--TODO Step 2: Design the layout for Random Dish details as below. It is similar to dish details but I have added the same design in our case to keep it simple.-->
 <!--START-->
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/srlRefreshLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"

@@ -13,4 +13,5 @@
     <dimen name="_120sdp">120dp</dimen>
     <dimen name="_14sdp">14sp</dimen>
     <dimen name="_12sdp">12sp</dimen>
+    <dimen name="_50sdp">50sp</dimen>
 </resources>
