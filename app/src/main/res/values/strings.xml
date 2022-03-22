@@ -71,5 +71,6 @@
     <!--START-->
     <string name="notification_title">Checkout new dish recipes</string>
     <string name="notification_subtitle">Tap for more detail</string>
+    <string name="title_details_fragment">Details Dish</string>
     <!--END-->
 </resources>

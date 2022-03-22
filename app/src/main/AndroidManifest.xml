@@ -20,7 +20,7 @@
             android:name=".view.activities.AddUpdateDishActivity"
             android:exported="false"
             android:theme="@style/Theme.FavDish.NoActionBar"
-            android:label="@string/add_dish"/>
+            android:label="@string/action_add_dish"/>
         <activity
             android:name=".view.activities.SplashActivity"
             android:exported="true"
